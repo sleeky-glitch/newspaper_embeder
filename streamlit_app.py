@@ -9,9 +9,15 @@ from openai.embeddings_utils import get_embedding
 st.title("PDF Embedding Processor")  
 st.write("Upload your PDFs to process and store embeddings in Pinecone.")  
 
-# Initialize Pinecone  
-pinecone.init(api_key="YOUR_PINECONE_API_KEY", environment="YOUR_PINECONE_ENVIRONMENT")  
-index = pinecone.Index("newspaper-embeddings")  # Replace with your Pinecone index name  
+# Read API keys from Streamlit secrets  
+pinecone_api_key = st.secrets["api_keys"]["pinecone_api_key"]  
+pinecone_environment = st.secrets["api_keys"]["pinecone_environment"]  
+openai_api_key = st.secrets["api_keys"]["openai_api_key"]  
+
+# Initialize Pinecone and OpenAI  
+pinecone.init(api_key=pinecone_api_key, environment=pinecone_environment)  
+openai.api_key = openai_api_key  
+
 
 # Function to process PDFs and generate embeddings  
 def process_pdf(file):  
