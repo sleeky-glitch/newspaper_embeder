@@ -6,11 +6,11 @@ from pinecone import Pinecone, ServerlessSpec
   
 # Initialize Pinecone  
 pc = Pinecone(  
-    api_key="YOUR_PINECONE_API_KEY"  # Replace with your Pinecone API key  
+    api_key="pinecone_api_key"  # Replace with your Pinecone API key  
 )  
   
 # Check if the index exists, and create it if it doesn't  
-index_name = "newspaper-embeddings"  # Replace with your index name  
+index_name = "gujnewspaper"  # Replace with your index name  
 if index_name not in pc.list_indexes().names():  
     pc.create_index(  
         name=index_name,  
@@ -18,7 +18,7 @@ if index_name not in pc.list_indexes().names():
         metric="cosine",  # Similarity metric (e.g., cosine, euclidean)  
         spec=ServerlessSpec(  
             cloud="aws",  # Replace with your cloud provider (e.g., aws, gcp)  
-            region="us-west-2"  # Replace with your Pinecone region  
+            region="us-east-1"  # Replace with your Pinecone region  
         )  
     )  
   
